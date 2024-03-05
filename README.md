@@ -1,4 +1,4 @@
-# firmware_test_encoder
+# Firmware_for_incremental_encoder_model_board
 
 I will upload updated versions of my work on this issue here: https://github.com/icub-tech-iit/study-encoders/issues/2
 
