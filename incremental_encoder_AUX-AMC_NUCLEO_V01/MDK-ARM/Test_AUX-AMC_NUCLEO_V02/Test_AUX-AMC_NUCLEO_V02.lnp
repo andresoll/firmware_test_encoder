@@ -1,0 +1,27 @@
+--cpu=Cortex-M4.fp.sp
+"test_aux-amc_nucleo_v02\startup_stm32g474xx.o"
+"test_aux-amc_nucleo_v02\main.o"
+"test_aux-amc_nucleo_v02\stm32g4xx_it.o"
+"test_aux-amc_nucleo_v02\stm32g4xx_hal_msp.o"
+"test_aux-amc_nucleo_v02\stm32g4xx_hal_uart.o"
+"test_aux-amc_nucleo_v02\stm32g4xx_hal_uart_ex.o"
+"test_aux-amc_nucleo_v02\stm32g4xx_hal.o"
+"test_aux-amc_nucleo_v02\stm32g4xx_hal_rcc.o"
+"test_aux-amc_nucleo_v02\stm32g4xx_hal_rcc_ex.o"
+"test_aux-amc_nucleo_v02\stm32g4xx_hal_flash.o"
+"test_aux-amc_nucleo_v02\stm32g4xx_hal_flash_ex.o"
+"test_aux-amc_nucleo_v02\stm32g4xx_hal_flash_ramfunc.o"
+"test_aux-amc_nucleo_v02\stm32g4xx_hal_gpio.o"
+"test_aux-amc_nucleo_v02\stm32g4xx_hal_exti.o"
+"test_aux-amc_nucleo_v02\stm32g4xx_hal_dma.o"
+"test_aux-amc_nucleo_v02\stm32g4xx_hal_dma_ex.o"
+"test_aux-amc_nucleo_v02\stm32g4xx_hal_pwr.o"
+"test_aux-amc_nucleo_v02\stm32g4xx_hal_pwr_ex.o"
+"test_aux-amc_nucleo_v02\stm32g4xx_hal_cortex.o"
+"test_aux-amc_nucleo_v02\stm32g4xx_hal_tim.o"
+"test_aux-amc_nucleo_v02\stm32g4xx_hal_tim_ex.o"
+"test_aux-amc_nucleo_v02\system_stm32g4xx.o"
+--strict --scatter "Test_AUX-AMC_NUCLEO_V02\Test_AUX-AMC_NUCLEO_V02.sct"
+--summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list "Test_AUX-AMC_NUCLEO_V02.map" -o Test_AUX-AMC_NUCLEO_V02\Test_AUX-AMC_NUCLEO_V02.axf
