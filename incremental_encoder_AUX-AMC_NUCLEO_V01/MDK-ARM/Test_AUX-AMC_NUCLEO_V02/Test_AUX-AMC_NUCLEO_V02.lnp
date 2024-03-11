@@ -1,6 +1,9 @@
 --cpu=Cortex-M4.fp.sp
 "test_aux-amc_nucleo_v02\startup_stm32g474xx.o"
 "test_aux-amc_nucleo_v02\main.o"
+"test_aux-amc_nucleo_v02\gpio.o"
+"test_aux-amc_nucleo_v02\usart.o"
+"test_aux-amc_nucleo_v02\tim.o"
 "test_aux-amc_nucleo_v02\stm32g4xx_it.o"
 "test_aux-amc_nucleo_v02\stm32g4xx_hal_msp.o"
 "test_aux-amc_nucleo_v02\stm32g4xx_hal_uart.o"
