@@ -25,6 +25,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "stdbool.h"
+#include "encoderWaveGenerator.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -46,19 +47,18 @@
 
 /* USER CODE BEGIN PV */
 
-volatile unsigned long T_wave = 7200/2;         // Define wave period
-volatile unsigned long offset_wave = 7200/2;    // Define wave offset
+
+
 volatile unsigned long T_index = 7200;          // Define index period
 
 volatile unsigned long time = 0;
-volatile unsigned long counter = 0;
-volatile unsigned long t = 0;                   // Current temp set 0
-volatile unsigned long dt = 0;                  // Temporal difference 0
+
+
+const uint32_t Twave_default = 7200/2;
+
 volatile unsigned long t1 = 0;                  // Current temp set 1
 volatile unsigned long dt1 = 0;                 // Temporal difference 1
-bool state1 = true;                             // Flag state for square wave 1
-bool state2 = true;                             // Flag state for square wave 2
-bool sequence = true;                           // Check flag
+
 bool index_state = false;                       // Flag for index call
 
 /* USER CODE END PV */
@@ -113,6 +113,8 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+  
+  init(Twave_default);
   while (1)
   {
     /* USER CODE END WHILE */
