@@ -48,25 +48,14 @@
 /* USER CODE BEGIN PV */
 
 
-
-volatile unsigned long T_index = 7200;          // Define index period
-
-volatile unsigned long time = 0;
-
-
 const uint32_t Twave_default = 7200/2;
 
-volatile unsigned long t1 = 0;                  // Current temp set 1
-volatile unsigned long dt1 = 0;                 // Temporal difference 1
-
-bool index_state = false;                       // Flag for index call
 
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 /* USER CODE BEGIN PFP */
-unsigned long micros_asolari(void);
 void Wave_generator(void);
 void Index_generator(void);
 void Index_timing(void);
@@ -183,54 +172,9 @@ void SystemClock_Config(void)
 
 /* USER CODE BEGIN 4 */
 
-unsigned long micros_asolari(void)
-{
-	return ((__HAL_TIM_GET_COUNTER(&TIM_TIME) + (time << 16) ) );
-}
-
-
-void Wave_generator(void)
-{
-	dt = micros_asolari()- t;
-	
-	if((dt>= T_wave) && (sequence==true)){
-		state1 = !state1;
-		HAL_GPIO_WritePin(ENCA_GPIO_Port,ENCA_Pin,state1);
-		sequence = false;
-	}
-	
-	if (dt >= (T_wave + offset_wave)){
-		state2 = !state2;
-		HAL_GPIO_WritePin(ENCB_GPIO_Port,ENCB_Pin,state2);
-		t = micros_asolari();
-		sequence = true;
-		counter++;
-	}	
-}
 
 
 
-void Index_generator(void)
-{
-	if (index_state == true)
-	{
-  HAL_GPIO_WritePin(ENCZ_GPIO_Port,ENCZ_Pin,true);
-	Index_timing();
-	}
-}
-
-
-
-void Index_timing(void)
-{
-  dt = micros_asolari() - t1;
-	
-	if(dt >= T_index)
-		{
-			HAL_GPIO_WritePin(ENCZ_GPIO_Port,ENCZ_Pin,false);
-			index_state = false;
-		}
-}
 
 
 //here i use the interrupt callback when timer roll over
@@ -246,7 +190,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 	{
 		//HAL_GPIO_TogglePin(ENCB_GPIO_Port, ENCB_Pin);
 		time++;
-  }
+    }
 }
 
 /* USER CODE END 4 */

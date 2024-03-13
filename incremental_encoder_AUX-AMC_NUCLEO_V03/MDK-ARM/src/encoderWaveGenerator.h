@@ -23,11 +23,21 @@
 
 
 #include <stdint.h>
+#include "tim.h"
 
 extern uint32_t counter;
+extern _Bool index_state;
+extern uint32_t t1;
+extern uint32_t time;
 
-// commento
+// this function generate a output signial 
 void Wave_generator(void);
+// this function detect index ctate condition
+void Index_generator(void);
+// This function generate a output signal for index event
+void Index_timing(void);
+// This function increment a time variable every uS
+uint32_t micros_asolari(void);
 
 void init(uint32_t waveLen);
 //uint32_t getCounter(void);
