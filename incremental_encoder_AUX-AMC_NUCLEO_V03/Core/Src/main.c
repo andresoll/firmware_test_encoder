@@ -103,7 +103,7 @@ int main(void)
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   
-  init(Twave_default);
+  //init(Twave_default);
   while (1)
   {
     /* USER CODE END WHILE */

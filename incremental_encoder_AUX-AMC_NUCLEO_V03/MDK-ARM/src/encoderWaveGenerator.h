@@ -23,9 +23,14 @@
 
 
 #include <stdint.h>
+#include "stdbool.h"
+#include "gpio.h"
 #include "tim.h"
 
-extern uint32_t counter;
+#include <stdint.h>
+#include "tim.h"
+
+extern uint32_t counter;  
 extern _Bool index_state;
 extern uint32_t t1;
 extern uint32_t time;
@@ -39,7 +44,7 @@ void Index_timing(void);
 // This function increment a time variable every uS
 uint32_t micros_asolari(void);
 
-void init(uint32_t waveLen);
+//void init(uint32_t waveLen);
 //uint32_t getCounter(void);
 //void setCounter(uint32_t value);
 

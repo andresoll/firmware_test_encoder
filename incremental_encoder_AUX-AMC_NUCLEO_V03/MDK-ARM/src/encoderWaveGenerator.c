@@ -42,12 +42,12 @@
 #define TIM_TIME htim16
 
 static uint32_t t = 0;                          // Current temp set 0
-static uint32_t T_wave = 7200/2;                // Define wave period
+static uint32_t T_wave = 5;                     // Define wave period
 static bool state1 = true;                      // Flag state for square wave 1
 static bool state2 = true;                      // Flag state for square wave 2
 static bool sequence = true;                    // Check flag
-static uint32_t offset_wave = 7200/2;           // Define wave offset
-static uint32_t T_index = 7200;
+static uint32_t offset_wave = 5;                // Define wave offset
+static uint32_t T_index = 10; 
 
 bool index_state = false;                       // Flag for index call
 
@@ -56,10 +56,10 @@ uint32_t time = 0;
 uint32_t t1 = 0;
 
 
-void init(uint32_t waveLen)
-{
-    T_wave = waveLen;
-}
+//void init(uint32_t waveLen)
+//{
+//    T_wave = waveLen;
+//}
 
 uint32_t micros_asolari(void)
 {
@@ -68,9 +68,9 @@ uint32_t micros_asolari(void)
 
 void Index_timing(void)
 {
-  uint32_t dt = micros_asolari() - t1;
+  uint32_t dt1 = micros_asolari() - t1;
 	
-	if(dt >= T_index)
+	if(dt1 >= T_index)
 	{
 		HAL_GPIO_WritePin(ENCZ_GPIO_Port,ENCZ_Pin,false);
 		index_state = false;
@@ -109,3 +109,60 @@ void Index_generator(void)
 	}
 }
 
+// here the Callback function ----------------------------------------------------------------------------------------------------
+
+// press button SW1 to configure the "normal situation" with Vel = 20°/s --> 11.5 KHz
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+{
+  if(GPIO_Pin == BUTTON_HALL_Pin) 
+  {
+    T_wave = 44/2;
+    offset_wave = 44/2;
+    T_index = 44;
+  }
+// press button SW2 to configure the "normal situation" with Vel = 40°/s --> 23 KHz  
+    if(GPIO_Pin == BUTTON_START_Pin) 
+  {
+    T_wave = 22/2;
+    offset_wave = 22/2;
+    T_index = 22;
+  }
+// press button SW3 to configure the "normal situation" with Vel = 90°/s --> 52 KHz
+    if(GPIO_Pin == BUTTON_SPEED_Pin) 
+  {
+    T_wave = 10/2;
+    offset_wave = 10/2;
+    T_index = 10;
+  }
+
+// press button SW5 to create a index fault
+    if(GPIO_Pin == BUTTON_MODE_Pin) 
+  {
+    T_index = T_index/3;
+  }
+}
+
+//// press button SW1 to configure the "normal situation" with Vel = 20°/s --> 11.5 KHz
+//void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+//{
+//  if(GPIO_Pin == BUTTON_HALL_Pin) 
+//  {
+//    T_wave = 44/2;
+//    offset_wave = 44/2;
+//    T_index = 44;
+//  }
+//// press button SW2 to configure the "normal situation" with Vel = 40°/s --> 23 KHz  
+//    if(GPIO_Pin == BUTTON_START_Pin) 
+//  {
+//    T_wave = 22/2;
+//    offset_wave = 22/2;
+//    T_index = 22;
+//  }
+//// press button SW3 to configure the "normal situation" with Vel = 90°/s --> 52 KHz
+//    if(GPIO_Pin == BUTTON_SPEED_Pin) 
+//  {
+//    T_wave = 10/2;
+//    offset_wave = 10/2;
+//    T_index = 10;
+//  }
+//}
