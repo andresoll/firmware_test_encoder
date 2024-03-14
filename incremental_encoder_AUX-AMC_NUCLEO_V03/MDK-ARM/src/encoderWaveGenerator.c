@@ -1,7 +1,7 @@
 /*
  * Copyright (C) 2024 iCub Facility - Istituto Italiano di Tecnologia
- * Author: 
- * email:  
+ * Author: Andrea Solari
+ * email:  andrea.solari@iit.it
  * website: www.robotcub.org
  * Permission is granted to copy, distribute, and/or modify this program
  * under the terms of the GNU General Public License, version 2 or any
@@ -42,12 +42,12 @@
 #define TIM_TIME htim16
 
 static uint32_t t = 0;                          // Current temp set 0
-static uint32_t T_wave = 5;                     // Define wave period
+static uint32_t T_wave = 0;                     // Define wave period
 static bool state1 = true;                      // Flag state for square wave 1
 static bool state2 = true;                      // Flag state for square wave 2
 static bool sequence = true;                    // Check flag
-static uint32_t offset_wave = 5;                // Define wave offset
-static uint32_t T_index = 10; 
+static uint32_t offset_wave = 0;                // Define wave offset
+static uint32_t T_index = 0; 
 
 bool index_state = false;                       // Flag for index call
 
@@ -55,6 +55,13 @@ uint32_t counter = 0;
 uint32_t time = 0;
 uint32_t t1 = 0;
 
+uint8_t activeConfigurations = 0;
+
+typedef enum{
+   CONFIGURATION_20_DEGREES_PER_SECOND = 1,
+   CONFIGURATION_40_DEGREES_PER_SECOND = 2,
+   CONFIGURATION_90_DEGREES_PER_SECOND = 4
+} Configuration;
 
 //void init(uint32_t waveLen)
 //{
@@ -109,60 +116,63 @@ void Index_generator(void)
 	}
 }
 
+
+void recipe(void) 
+{
+    if(activeConfigurations & CONFIGURATION_20_DEGREES_PER_SECOND) 
+    {
+        static uint32_t T_wave = 44 / 2;
+        static uint32_t offset_wave = 44 / 2;
+        static uint32_t T_index = 44;
+    }
+    if(activeConfigurations & CONFIGURATION_40_DEGREES_PER_SECOND) 
+    {
+        static uint32_t T_wave = 22 / 2;
+        static uint32_t offset_wave = 22 / 2;
+        static uint32_t T_index = 22;
+    }
+    if(activeConfigurations & CONFIGURATION_90_DEGREES_PER_SECOND) 
+    {
+        static uint32_t T_wave = 10 / 2;
+        static uint32_t offset_wave = 10 / 2;
+        static uint32_t T_index = 10;
+    }else
+    {
+        static uint32_t T_wave = 60 / 2;
+        static uint32_t offset_wave = 60 / 2;
+        static uint32_t T_index = 60;
+    }
+
+}
+
+
+
 // here the Callback function ----------------------------------------------------------------------------------------------------
 
-// press button SW1 to configure the "normal situation" with Vel = 20°/s --> 11.5 KHz
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
-  if(GPIO_Pin == BUTTON_HALL_Pin) 
-  {
-    T_wave = 44/2;
-    offset_wave = 44/2;
-    T_index = 44;
-  }
-// press button SW2 to configure the "normal situation" with Vel = 40°/s --> 23 KHz  
-    if(GPIO_Pin == BUTTON_START_Pin) 
-  {
-    T_wave = 22/2;
-    offset_wave = 22/2;
-    T_index = 22;
-  }
-// press button SW3 to configure the "normal situation" with Vel = 90°/s --> 52 KHz
-    if(GPIO_Pin == BUTTON_SPEED_Pin) 
-  {
-    T_wave = 10/2;
-    offset_wave = 10/2;
-    T_index = 10;
-  }
 
+ switch(GPIO_Pin) 
+     {
+     case BUTTON_HALL_Pin:
+         activeConfigurations |= CONFIGURATION_20_DEGREES_PER_SECOND;
+         break;
+     case BUTTON_START_Pin:
+         activeConfigurations |= CONFIGURATION_40_DEGREES_PER_SECOND;
+         break;
+     case BUTTON_SPEED_Pin:
+         activeConfigurations |= CONFIGURATION_90_DEGREES_PER_SECOND;
+         break;
+     default:
+                //
+         break;
+     }    
+    
+    
 // press button SW5 to create a index fault
     if(GPIO_Pin == BUTTON_MODE_Pin) 
   {
     T_index = T_index/3;
   }
 }
-
-//// press button SW1 to configure the "normal situation" with Vel = 20°/s --> 11.5 KHz
-//void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
-//{
-//  if(GPIO_Pin == BUTTON_HALL_Pin) 
-//  {
-//    T_wave = 44/2;
-//    offset_wave = 44/2;
-//    T_index = 44;
-//  }
-//// press button SW2 to configure the "normal situation" with Vel = 40°/s --> 23 KHz  
-//    if(GPIO_Pin == BUTTON_START_Pin) 
-//  {
-//    T_wave = 22/2;
-//    offset_wave = 22/2;
-//    T_index = 22;
-//  }
-//// press button SW3 to configure the "normal situation" with Vel = 90°/s --> 52 KHz
-//    if(GPIO_Pin == BUTTON_SPEED_Pin) 
-//  {
-//    T_wave = 10/2;
-//    offset_wave = 10/2;
-//    T_index = 10;
-//  }
-//}
+       

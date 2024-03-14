@@ -1,7 +1,7 @@
 /*
  * Copyright (C) 2024 iCub Facility - Istituto Italiano di Tecnologia
- * Author:  Marco Accame
- * email:   marco.accame@iit.it
+ * Author:  Andrea Solari
+ * email:   andrea.solari@iit.it
  * website: www.robotcub.org
  * Permission is granted to copy, distribute, and/or modify this program
  * under the terms of the GNU General Public License, version 2 or any
@@ -43,6 +43,8 @@ void Index_generator(void);
 void Index_timing(void);
 // This function increment a time variable every uS
 uint32_t micros_asolari(void);
+
+void recipe(void);
 
 //void init(uint32_t waveLen);
 //uint32_t getCounter(void);
