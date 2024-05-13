@@ -101,6 +101,7 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   
   init(Twave_default, Owave_default, Tindex_default);
+  index_none = false;                                                // flag test for index none
   while (1)
   {
     /* USER CODE END WHILE */
@@ -111,7 +112,7 @@ int main(void)
 
 // Check index state with counter      
 		
-	if(counter >= 1300) 
+	if((counter >= (940*16)) && (index_none == false)) 
 	{
 	 index_state = true;
 	 counter = 0;

@@ -30,6 +30,7 @@
 
 extern uint32_t counter;  
 extern bool index_state;
+extern bool index_none;
 extern uint32_t t1;
 extern uint32_t time;
 

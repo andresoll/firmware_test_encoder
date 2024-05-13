@@ -30,6 +30,7 @@ static uint32_t offset_wave = 50;                                       // Defin
 static uint32_t T_index = 100;                                          // Define index end set default
                                                                         
 bool index_state = false;                                               // Flag for index call
+bool index_none = false;                                                // flag test for index none
                                                                         
 uint32_t counter = 0;                                                   // Global start value for counter
 uint32_t time = 0;                                                      // Global start value for time
@@ -100,20 +101,20 @@ void Index_generator(void)
 
 
 /*
- * ENCODER CPR --> 1300
- * => 360°/1300 = 0.2769° OF RESOLUTION
- * THE GEARBOX BETEWEEN HIGH/LOW SPEED IS 160
+ * ENCODER CPR --> 1300  (940)
+ * => 360°/1300 = 0.2769° OF RESOLUTION, 360°/940 = 0.3830°
+ * THE GEARBOX BETEWEEN HIGH/LOW SPEED IS 160, 100
  * MAX SPEED MOTOR IS 6000 RPM --> 105 KHz
 */
 
-// press button SW1 to configure the "normal situation" with Vel = 20°/s --> 11.5 KHz
+// press button SW1 to configure the "normal situation" with Vel = 20°/s --> 11.5 KHz  (5.22 KHz se cpr=940 e r=100)
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
   if(GPIO_Pin == BUTTON_HALL_Pin) 
   {
-    T_wave = 44/2;
-    offset_wave = 44/2;
-    T_index = 44;
+    T_wave = 48/2;
+    offset_wave = 48/2;
+    T_index = 48;
   
     // Update LED USER status
       
@@ -122,7 +123,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
       HAL_GPIO_WritePin(LED_M3_GPIO_Port,LED_M3_Pin,true);
       
   }
-// press button SW2 to configure the "normal situation" with Vel = 40°/s --> 23 KHz  
+// press button SW2 to configure the "normal situation" with Vel = 40°/s --> 23 KHz  (10.44 KHz se cpr=940 e r=100)
    if(GPIO_Pin == BUTTON_START_Pin) 
   {
     T_wave = 22/2;
@@ -137,12 +138,13 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
       
       
   }
-// press button SW5 to configure the "normal situation" with Vel = 90°/s --> 52 KHz
+// press button SW5 to configure the "normal situation" with Vel = 90°/s --> 52 KHz   (23.5 KHz se cpr=940 e r=100)
     if(GPIO_Pin == BUTTON_MODE_Pin) 
   {
-    T_wave = 10/2;
-    offset_wave = 10/2;
-    T_index = 10;
+    T_wave = 16/2;
+    offset_wave = 16/2;
+    T_index = 16; 
+    index_none = true;                                       // test for index none
   
     // Update LED USER status
       
