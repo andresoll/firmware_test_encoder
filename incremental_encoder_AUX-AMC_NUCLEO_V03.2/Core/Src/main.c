@@ -127,7 +127,7 @@ int main(void)
 
 // Check index state with counter      
 		
-	if((counter >= (cpr)) && (index_none == false))
+	if((counter >= (((940*4)-40)*2)) && (index_none == false))    //940 its correct
 	{
 	 index_state = true;
 	 counter = 0;

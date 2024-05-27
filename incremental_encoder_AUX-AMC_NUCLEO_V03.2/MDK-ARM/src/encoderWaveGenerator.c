@@ -117,9 +117,9 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
       
     cpr = 940*16;                                              // Set normal cpr
       
-    T_wave = 48/2;
-    offset_wave = 48/2;
-    T_index = 48;
+    T_wave = 4800/2;              //48/2;
+    offset_wave = 4800/2;         //48/2;
+    T_index = 4800;               //48;
   
     // Update LED USER status
       
@@ -131,7 +131,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
       HAL_GPIO_WritePin(LED_S1_GPIO_Port,LED_S1_Pin,true);
       
   }
-// press button SW2 to configure the "normal situation" with Vel = 40°/s --> 23 KHz  (10.44 KHz se cpr=940 e r=100)
+// press button SW2 to configure the "normal situation" with Vel = 20°/s --> 23 KHz  (10.44 KHz se cpr=940 e r=100)
    if(GPIO_Pin == BUTTON_START_Pin) 
   {
       
