@@ -45,7 +45,7 @@ void Index_timing(void);
 // This function increment a time variable every uS
 uint32_t micros_asolari(void);
 
-void init(uint32_t waveLen, uint32_t offset_wave, uint32_t T_index);
+void init(uint32_t waveLen, uint32_t offsetWave, uint32_t TIndex);
 //uint32_t getCounter(void);
 //void setCounter(uint32_t value);
 

@@ -821,11 +821,11 @@ ARM Macro Assembler    Page 13
 Command Line: --debug --xref --diag_suppress=9931,A1950W --cpu=Cortex-M4.fp.sp 
 --depend=incremental_encoder_aux-amc_nucleo_v03\startup_stm32g474xx.d -oincreme
 ntal_encoder_aux-amc_nucleo_v03\startup_stm32g474xx.o -I.\RTE\_incremental_enco
-der_AUX-AMC_NUCLEO_V03 -IC:\Users\asolari\AppData\Local\Arm\Packs\ARM\CMSIS\5.9
-.0\CMSIS\Core\Include -IC:\Users\asolari\AppData\Local\Arm\Packs\Keil\STM32G4xx
-_DFP\1.5.0\Drivers\CMSIS\Device\ST\STM32G4xx\Include --predefine="__UVISION_VER
-SION SETA 539" --predefine="_RTE_ SETA 1" --predefine="STM32G474xx SETA 1" --pr
-edefine="_RTE_ SETA 1" --list=startup_stm32g474xx.lst startup_stm32g474xx.s
+der_AUX-AMC_NUCLEO_V03 -IC:\Users\vgaggero\AppData\Local\Arm\Packs\ARM\CMSIS\5.
+9.0\CMSIS\Core\Include -IC:\Users\vgaggero\AppData\Local\Arm\Packs\Keil\STM32G4
+xx_DFP\1.5.0\Drivers\CMSIS\Device\ST\STM32G4xx\Include --predefine="__UVISION_V
+ERSION SETA 538" --predefine="_RTE_ SETA 1" --predefine="STM32G474xx SETA 1" --
+predefine="_RTE_ SETA 1" --list=startup_stm32g474xx.lst startup_stm32g474xx.s
 
 
 

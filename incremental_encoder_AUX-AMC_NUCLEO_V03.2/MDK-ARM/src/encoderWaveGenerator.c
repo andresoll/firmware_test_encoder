@@ -39,9 +39,11 @@ uint32_t t1 = 0;                                                        // Globa
 uint16_t cpr = 940*16;                                                  // Correct value for cpr
 
 
-void init(uint32_t waveLen, uint32_t offset_wave, uint32_t T_index)     // First value without button press
+void init(uint32_t waveLen, uint32_t offsetWave, uint32_t TIndex)     // First value without button press
 {
     T_wave = waveLen;
+    offset_wave = offsetWave;
+    T_index = TIndex;
 }
 
 
@@ -84,7 +86,10 @@ void Wave_generator(void)
         HAL_GPIO_WritePin(ENCB_GPIO_Port,ENCB_Pin,state2);              // Here write the state for GPIO
         t = micros_asolari();
         sequence = true;
-        counter++;                                                      // Update a index counter
+        if( (false==state1) && (false==state2)
+        {
+            counter++;                                                  // Update a index counter only when both signals are low
+        }
     }
 }
 
